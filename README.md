@@ -41,6 +41,6 @@ information.
 
 | Name | Description |
 |------|-------------|
-| write_files_entry | The write_files section for the user data. |
-| rancher_service_data | The docker-compose service in the rancher section of the user data. |
+| write_files_entry | The `write_files` section for the user data. |
+| rancher_service_data | The Docker Compose service in the rancher section of the user data. |
 

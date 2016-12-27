@@ -1,4 +1,4 @@
-// The write_files section for the user data.
+// The `write_files` section for the user data.
 output "write_files_entry" {
   value = <<EOS
 write_files:
@@ -8,13 +8,7 @@ write_files:
 EOS
 }
 
-// write_files:
-//   - path: /tmp/Dockerfile.${service_name}
-//     content: ${base64encode(var.dockerfile_data)}
-//     encoding: b64
-// EOS
-
-// The docker-compose service in the rancher section of the user data.
+// The Docker Compose service in the rancher section of the user data.
 output "rancher_service_data" {
   value = <<EOS
 rancher:

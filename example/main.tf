@@ -32,7 +32,7 @@ output "write_files_entry" {
   value = "${module.example_service.write_files_entry}"
 }
 
-// The docker-compose service in the rancher section of the user data.
+// The Docker Compose service in the rancher section of the user data.
 output "rancher_service_data" {
   value = "${module.example_service.rancher_service_data}"
 }
