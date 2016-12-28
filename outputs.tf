@@ -1,3 +1,5 @@
+// module terraform_rancher_service
+
 // The `write_files` section for the user data.
 output "write_files_entry" {
   value = <<EOS
