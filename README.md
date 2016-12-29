@@ -36,11 +36,12 @@ information.
 | service_name | The name of the service. | - | yes |
 | dockerfile_data | The Dockerfile data for the service. A combination of this, or `image_name` needs to be supplied. The effect varies, depending on what is supplied:<br><br>* `dockerfile_data` only: A random name is chosen for the image.<br><br>* `image_name` only: The docker image is pulled from the referenced registry and repository.<br><br>* Both `dockerfile_data` and `image_name`: A new image is built off of the data, and used.<br><br>This behaviour is actually controlled by Docker Compose, found [here](https://docs.docker.com/compose/compose-file/#/service-configuration-reference).<br><br>Either this or `image_name` needs to be supplied, or else the module will exhibit undefined behaviour. | `` | no |
 | image_name | A Docker image name, either as an image to pull for the service or a name to name the resulting image built from the supplied Dockerfile data. See the `dockerfile_data` variable for information on how this variable interacts with any data supplied there.<br><br>Either this or `dockerfile_data` needs to be supplied, or else the module will exhibit undefined behaviour. | `` | no |
+| network_mode | The network mode to use within the container. Valid values are `bridge` (the default), `host` for host networking, `service:[service name]` to use the stack of another defined service, or `container:[container name/id]` to use one of an existing container. If you are specifying this option here with Rancher, you almost always want `host`. `none` is also valid, but more than likely will not be helpful in a Rancher container either. | `` | no |
 
 ## Outputs
 
 | Name | Description |
 |------|-------------|
-| write_files_entry | The `write_files` section for the user data. |
+| write_files_entry | The `write_files` section for the user data. This value will be incomplete if you are not using a Dockerfile. |
 | rancher_service_data | The Docker Compose service in the rancher section of the user data. |
 

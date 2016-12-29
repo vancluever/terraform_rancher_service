@@ -21,10 +21,11 @@ variable "image_name" {
 
 // example_service provides our sample service.
 module "example_service" {
-  source          = "../"
+  source          = "../../"
   service_name    = "${var.service_name}"
   dockerfile_data = "${var.dockerfile_data}"
   image_name      = "${var.image_name}"
+  network_mode    = "host"
 }
 
 // The write_files section for the user data.

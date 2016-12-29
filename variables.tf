@@ -37,3 +37,14 @@ variable "image_name" {
   type    = "string"
   default = ""
 }
+
+// The network mode to use within the container. Valid values are `bridge` (the
+// default), `host` for host networking, `service:[service name]` to use the
+// stack of another defined service, or `container:[container name/id]` to use
+// one of an existing container. If you are specifying this option here with
+// Rancher, you almost always want `host`. `none` is also valid, but more than
+// likely will not be helpful in a Rancher container either.
+variable "network_mode" {
+  type    = "string"
+  default = ""
+}
