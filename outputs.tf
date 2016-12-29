@@ -12,5 +12,5 @@ EOS
 
 // The Docker Compose service in the rancher section of the user data.
 output "rancher_service_data" {
-  value = "${format("    %s:\n", var.service_name)}${var.dockerfile_data != "" ? format("      dockerfile: /tmp/Dockerfile.%s\n", var.service_name) : "" }${var.image_name != "" ? format("      image: %s\n", var.image_name) : "" }${var.network_mode != "" ? format("      network_mode: %s", var.network_mode) : "" }"
+  value = "${replace(data.template_file.rancher_service_data.rendered, "/\n\\s*~~/", "")}"
 }
