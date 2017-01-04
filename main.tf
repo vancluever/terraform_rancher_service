@@ -3,16 +3,17 @@
  * 
  * Module `terraform_rancher_service` provides a semantic way to generate
  * `cloud-config` entries suitable for use with [RancherOS][1]. The module will
- * generate both a `write_files` and a `rancher` services section - the latter
- * being compatible with [Docker Compose][2], which is Rancher's pattern for
- * managing services within the operating system.
+ * generate a `rancher` services section - which is mostly compatible with with
+ * [Docker Compose][2] Version 1. This is Rancher's pattern for managing
+ * services within the operating system.
  * 
  * [1]: http://rancher.com/rancher-os/
  * [2]: https://docs.docker.com/compose/
  * 
- * This module is not necessarily intended to be used as a building block, along
- * with [`terraform_rancher_user_data`][3], to build a complete set of user data
- * that can then be passed to a RancherOS instance (such as in AWS).
+ * This module is not necessarily intended to be used alone, but rather as a
+ * building block, along with [`terraform_rancher_user_data`][3], to build a
+ * complete set of user data that can then be passed to a RancherOS instance
+ * (such as in AWS).
  * 
  * [3]: https://github.com/vancluever/terraform_rancher_user_data
  * 
@@ -22,11 +23,32 @@
  * 
  * [4]: https://github.com/vancluever/terraform_rancher_consul
  *
- * ## Modes
- * 
- * Since Rancher system services are basically just Docker Compose entries, the
- * same rules are followed when `Dockerfile` path, image names, or both, are
- * supplied. See the variables section of the documentation for specific
- * information.
+ * Usage Example:
+ *
+ *     module "service" {
+ *       source = "github.com/vancluever/terraform_rancher_service"
+ *     
+ *       capabilities = [
+ *         "CAP_1",
+ *         "CAP_2",
+ *       ]
+ *     
+ *       command = "/bin/bash -l"
+ *     
+ *       environment = {
+ *         "ENV1" = "value1"
+ *         "ENV2" = "value2"
+ *       }
+ *     
+ *       image_name   = "foobar:latest"
+ *       network_mode = "host"
+ *       service_name = "foobar"
+ *     
+ *       volumes = [
+ *         "/path/to/volume:/path/to/dest",
+ *         "/var/run/docker.sock:/var/run/docker.sock",
+ *       ]
+ *     }
+ *
  */
 

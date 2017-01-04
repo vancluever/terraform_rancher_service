@@ -5,37 +5,12 @@ variable "service_name" {
   type = "string"
 }
 
-// The Dockerfile data for the service. A combination of this, or `image_name`
-// needs to be supplied. The effect varies, depending on what is supplied:
-//
-//  * `dockerfile_data` only: A random name is chosen for the image.
-//
-//  * `image_name` only: The docker image is pulled from the referenced
-//     registry and repository.
-//
-//  * Both `dockerfile_data` and `image_name`: A new image is built off of the
-//    data, and used.
-//
-// This behaviour is actually controlled by Docker Compose, found
-// [here](https://docs.docker.com/compose/compose-file/#/service-configuration-reference).
-//
-// Either this or `image_name` needs to be supplied, or else the module will
-// exhibit undefined behaviour.
-variable "dockerfile_data" {
-  type    = "string"
-  default = ""
-}
-
-// A Docker image name, either as an image to pull for the service or a name to
-// name the resulting image built from the supplied Dockerfile data. See the
-// `dockerfile_data` variable for information on how this variable interacts
-// with any data supplied there.
-//
-// Either this or `dockerfile_data` needs to be supplied, or else the module
-// will exhibit undefined behaviour.
+// The name of the Docker image to run this service with. More than likely this
+// will exist remotely, and will be pulled for you. Using pre-built images,
+// either via user data or stored on the image, is currently not supported by
+// this module.
 variable "image_name" {
-  type    = "string"
-  default = ""
+  type = "string"
 }
 
 // The network mode to use within the container. Valid values are `bridge` (the
@@ -64,13 +39,17 @@ variable "environment" {
   default = {}
 }
 
-// A map of source/destination pairs that can be used to pass volumes into the
+// A map of source:destination pairs that can be used to pass volumes into the
 // container. See [this
 // page](https://docs.docker.com/compose/compose-file/#/volumes-volumedriver)
 // for information on how to specify this option.
+//
+// **NOTE**: Rancher currently uses a Version 1 Docker Compose format and does
+// not support named volumes in this variable. Hence only bind volumes are
+// supported.
 variable "volumes" {
-  type    = "map"
-  default = {}
+  type    = "list"
+  default = []
 }
 
 // Overrides the default command for the container.

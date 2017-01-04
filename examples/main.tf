@@ -41,12 +41,12 @@ variable "environment" {
 
 // The volume map for the service.
 variable "volumes" {
-  type = "map"
+  type = "list"
 
-  default = {
-    "/path/to/volume" = "/path/to/dest"
-    "named"           = "/container/path/named"
-  }
+  default = [
+    "/path/to/volume:/path/to/dest",
+    "/var/run/docker.sock:/var/run/docker.sock",
+  ]
 }
 
 // The overridden default command.
@@ -57,20 +57,14 @@ variable "command" {
 
 // example_service provides our sample service.
 module "example_service" {
-  source          = "../"
-  capabilities    = "${var.capabilities}"
-  command         = "${var.command}"
-  dockerfile_data = "${var.dockerfile_data}"
-  environment     = "${var.environment}"
-  image_name      = "${var.image_name}"
-  network_mode    = "host"
-  service_name    = "${var.service_name}"
-  volumes         = "${var.volumes}"
-}
-
-// The write_files section for the user data.
-output "write_files_entry" {
-  value = "\n${module.example_service.write_files_entry}"
+  source       = "../"
+  capabilities = "${var.capabilities}"
+  command      = "${var.command}"
+  environment  = "${var.environment}"
+  image_name   = "${var.image_name}"
+  network_mode = "host"
+  service_name = "${var.service_name}"
+  volumes      = "${var.volumes}"
 }
 
 // The Docker Compose service in the rancher section of the user data.
