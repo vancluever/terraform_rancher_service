@@ -18,7 +18,7 @@ data "template_file" "rancher_service_data" {
       ${var.command != "" ? format("command: %s", var.command) : "~~" }
       ${length(var.environment) > 0 ? format("environment:\n        %s", join("\n        ", data.template_file.environment_map_formatted.*.rendered)) : "~~" }
       image: ${var.image_name}
-      ${var.network_mode != "" ? format("network_mode: %s", var.network_mode) : "~~" }
+      ${var.network_mode != "" ? format("net: %s", var.network_mode) : "~~" }
       ${length(var.volumes) > 0 ? format("volumes:\n        - %s", join("\n        - ", var.volumes)) : "~~" }
 EOS
 }
