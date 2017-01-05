@@ -19,13 +19,23 @@ variable "image_name" {
   default = "example_image"
 }
 
-// The capabilities for the service.
-variable "capabilities" {
+// The capabilities to add for this service.
+variable "cap_add" {
   type = "list"
 
   default = [
     "CAP_1",
     "CAP_2",
+  ]
+}
+
+// The capabilities to drop for this service.
+variable "cap_drop" {
+  type = "list"
+
+  default = [
+    "CAP_3",
+    "CAP_4",
   ]
 }
 
@@ -58,7 +68,8 @@ variable "command" {
 // example_service provides our sample service.
 module "example_service" {
   source       = "../"
-  capabilities = "${var.capabilities}"
+  cap_add      = "${var.cap_add}"
+  cap_drop     = "${var.cap_drop}"
   command      = "${var.command}"
   environment  = "${var.environment}"
   image_name   = "${var.image_name}"

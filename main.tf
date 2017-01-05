@@ -28,9 +28,14 @@
  *     module "service" {
  *       source = "github.com/vancluever/terraform_rancher_service"
  *     
- *       capabilities = [
+ *       cap_add = [
  *         "CAP_1",
  *         "CAP_2",
+ *       ]
+ *
+ *       cap_drop = [
+ *         "CAP_3",
+ *         "CAP_4",
  *       ]
  *     
  *       command = "/bin/bash -l"

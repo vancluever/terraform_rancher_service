@@ -14,7 +14,8 @@ data "template_file" "environment_map_formatted" {
 data "template_file" "rancher_service_data" {
   template = <<EOS
     ${var.service_name}:
-      ${length(var.capabilities) > 0 ? format("capabilities:\n        - %s", join("\n        - ", var.capabilities)) : "~~" }
+      ${length(var.cap_add) > 0 ? format("cap_add:\n        - %s", join("\n        - ", var.cap_add)) : "~~" }
+      ${length(var.cap_drop) > 0 ? format("cap_drop:\n        - %s", join("\n        - ", var.cap_drop)) : "~~" }
       ${var.command != "" ? format("command: %s", var.command) : "~~" }
       ${length(var.environment) > 0 ? format("environment:\n        %s", join("\n        ", data.template_file.environment_map_formatted.*.rendered)) : "~~" }
       image: ${var.image_name}

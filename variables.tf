@@ -27,7 +27,13 @@ variable "network_mode" {
 // A set of capabilities to add to the container, such as
 // `CAP_NET_BIND_SERVICE` which will allow a container to bind to a privileged
 // port (which can help when using `network_mode: host`).
-variable "capabilities" {
+variable "cap_add" {
+  type    = "list"
+  default = []
+}
+
+// A set of capabilities to remove from the container.
+variable "cap_drop" {
   type    = "list"
   default = []
 }
