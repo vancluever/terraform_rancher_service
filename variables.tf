@@ -39,7 +39,9 @@ variable "cap_drop" {
 }
 
 // A map of key/value pairs that can be used to pass environment variables into
-// a container.
+// a container. Any boolean values; `true`, `false`, `yes`, or `no`, need to be
+// enclosed in quotes to ensure they are not converted to a non-string `True`
+// or `False` by the YAML parser.
 variable "environment" {
   type    = "map"
   default = {}

@@ -65,7 +65,7 @@ Usage Example:
 | network_mode | The network mode to use within the container. Valid values are `bridge` (the default), `host` for host networking, `service:[service name]` to use the stack of another defined service, or `container:[container name/id]` to use one of an existing container. If you are specifying this option here with Rancher, you almost always want `host`. `none` is also valid, but more than likely will not be helpful in a Rancher container either. | `` | no |
 | cap_add | A set of capabilities to add to the container, such as `CAP_NET_BIND_SERVICE` which will allow a container to bind to a privileged port (which can help when using `network_mode: host`). | `<list>` | no |
 | cap_drop | A set of capabilities to remove from the container. | `<list>` | no |
-| environment | A map of key/value pairs that can be used to pass environment variables into a container. | `<map>` | no |
+| environment | A map of key/value pairs that can be used to pass environment variables into a container. Any boolean values; `true`, `false`, `yes`, or `no`, need to be enclosed in quotes to ensure they are not converted to a non-string `True` or `False` by the YAML parser. | `<map>` | no |
 | volumes | A map of source:destination pairs that can be used to pass volumes into the container. See [this page](https://docs.docker.com/compose/compose-file/#/volumes-volumedriver) for information on how to specify this option.<br><br>**NOTE**: Rancher currently uses a Version 1 Docker Compose format and does not support named volumes in this variable. Hence only bind volumes are supported. | `<list>` | no |
 | command | Overrides the default command for the container. | `` | no |
 
